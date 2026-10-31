@@ -10,7 +10,10 @@
     { "src": "/quiz", "dest": "backend/server.js" },
     { "src": "/health", "dest": "backend/server.js" },
     { "src": "/memory", "dest": "backend/server.js" },
-    { "handle": "filesystem" },
+    { "src": "/app/(.*)", "dest": "frontend/app/$1" },
+    { "src": "/styles/(.*)", "dest": "frontend/styles/$1" },
+    { "src": "/([^/]+\\.html)", "dest": "frontend/$1" },
+    { "src": "/", "dest": "frontend/index.html" },
     { "src": "/(.*)", "dest": "frontend/index.html" }
   ]
 }
