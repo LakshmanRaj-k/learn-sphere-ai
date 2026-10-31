@@ -9,3 +9,4 @@ nodevars.bat
 coverage/
 dist/
 build/
+.vercel
