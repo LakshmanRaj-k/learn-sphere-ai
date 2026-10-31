@@ -112,8 +112,12 @@ app.use((req, res) => {
   res.sendFile(path.join(publicDir, "index.html"));
 });
 
-app.listen(PORT, async () => {
-  console.log(`LearnSphere AI server listening on http://localhost:${PORT}`);
-  await testConnection();
-});
+if (require.main === module) {
+  app.listen(PORT, async () => {
+    console.log(`LearnSphere AI server listening on http://localhost:${PORT}`);
+    await testConnection();
+  });
+}
+
+module.exports = app;
 
