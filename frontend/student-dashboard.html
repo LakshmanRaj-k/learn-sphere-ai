@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Dashboard • LearnSphere AI</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <style>
+      .dash {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 240px 1fr;
+      }
+
+      .sidebar {
+        background: var(--color-primary);
+        color: #ffffff;
+        padding: 18px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .sidebar__brand {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        font-size: 18px;
+        padding: 10px 10px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-top: 8px;
+      }
+
+      .nav a {
+        color: #ffffff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 10px;
+        border-radius: 10px;
+        opacity: 0.95;
+      }
+
+      .nav a:hover {
+        background: rgba(255, 255, 255, 0.14);
+        opacity: 1;
+      }
+
+      .nav a[aria-current="page"] {
+        background: rgba(255, 255, 255, 0.18);
+        opacity: 1;
+      }
+
+      .icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.16);
+        font-size: 14px;
+        font-weight: 700;
+        flex: 0 0 auto;
+      }
+
+      .content {
+        background: var(--color-bg);
+        padding: var(--section-gap);
+      }
+
+      .welcome {
+        padding: 20px;
+      }
+
+      .welcome__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .welcome__title {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .welcome__subtitle {
+        margin: 6px 0 0;
+        color: var(--color-text-muted);
+      }
+
+      .join-card {
+        margin-top: var(--section-gap);
+        padding: 20px;
+      }
+
+      .join-form {
+        display: flex;
+        gap: 10px;
+        margin-top: 12px;
+        flex-wrap: wrap;
+      }
+
+      .join-form input[type="text"] {
+        flex: 1 1 200px;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        font: inherit;
+        background: #ffffff;
+      }
+
+      .join-form input[type="text"]:focus-visible {
+        outline: none;
+        box-shadow: var(--focus-ring);
+        border-color: transparent;
+      }
+
+      .join-button {
+        white-space: nowrap;
+      }
+
+      .joined-list {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .joined-item {
+        background: #ffffff;
+        border-radius: 999px;
+        padding: 6px 12px;
+        font-size: 13px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: var(--section-gap);
+      }
+
+      @media (max-width: 980px) {
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        
+        .join-form input[type="text"] {
+          flex: 1 1 100%;
+        }
+        
+        .join-button {
+          flex: 1 1 100%;
+          justify-content: center;
+        }
+        
+        .welcome__row {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="mobile-header__brand">LearnSphere AI</div>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash">
+      <!-- Sidebar Overlay -->
+      <div class="sidebar-overlay" aria-hidden="true"></div>
+
+      <aside class="sidebar" aria-label="Student navigation">
+        <div class="sidebar__brand">LearnSphere AI</div>
+
+        <nav class="nav">
+          <a href="#" aria-current="page">
+            <span class="icon">D</span>
+            <span>Dashboard</span>
+          </a>
+          <a href="#">
+            <span class="icon">L</span>
+            <span>Learn</span>
+          </a>
+          <a href="#">
+            <span class="icon">Q</span>
+            <span>Quiz</span>
+          </a>
+          <a href="#">
+            <span class="icon">P</span>
+            <span>Progress</span>
+          </a>
+          <a href="#">
+            <span class="icon">S</span>
+            <span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section class="card welcome">
+          <div class="welcome__row">
+            <div>
+              <h1 class="welcome__title">Welcome back</h1>
+              <p class="welcome__subtitle">
+                Continue learning with your classes and personalized insights.
+              </p>
+            </div>
+            <span class="badge badge-success">Active</span>
+          </div>
+        </section>
+
+        <section class="card join-card" aria-label="Join a class">
+          <h2 class="card__title">Join a Class</h2>
+          <div class="join-form">
+            <input
+              type="text"
+              placeholder="Enter Class Code"
+              aria-label="Class code"
+            />
+            <button class="btn btn-secondary join-button" type="button">
+              Join
+            </button>
+          </div>
+
+          <div class="joined-list" aria-label="Joined classes">
+            <div class="joined-item">CS101 – Intro to AI</div>
+            <div class="joined-item">MATH204 – Linear Algebra</div>
+            <div class="joined-item">ENG115 – Academic Writing</div>
+          </div>
+        </section>
+
+        <section class="grid-3" aria-label="Student overview cards">
+          <article class="card">
+            <h2 class="card__title">Joined Classes</h2>
+            <p class="card__subtitle">
+              View enrolled classes and upcoming sessions in one place.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2 class="card__title">AI Recommendation</h2>
+            <p class="card__subtitle">
+              Suggested topics and practice paths based on your activity.
+            </p>
+          </article>
+
+          <article class="card">
+            <h2 class="card__title">Progress Overview</h2>
+            <p class="card__subtitle">
+              Track completion trends and highlight areas to strengthen.
+            </p>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="./app/mobile-nav.js"></script>
+  </body>
+</html>
+

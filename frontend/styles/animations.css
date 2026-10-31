@@ -1,0 +1,232 @@
+/* LearnSphere AI — Animations and transitions */
+
+/* Global: 200ms smooth transitions */
+.ls-transition {
+  transition: opacity var(--duration-normal) var(--ease-out),
+    transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out),
+    background-color var(--duration-normal) var(--ease-out),
+    border-color var(--duration-normal) var(--ease-out);
+}
+
+/* Page load: fade-in */
+@keyframes ls-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ls-fade-in {
+  animation: ls-fade-in var(--duration-slow) var(--ease-out) forwards;
+}
+
+/* Cards: slide-up */
+@keyframes ls-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ls-slide-up {
+  animation: ls-slide-up var(--duration-slow) var(--ease-out) forwards;
+}
+
+.ls-slide-up-delay-1 { animation-delay: 50ms; }
+.ls-slide-up-delay-2 { animation-delay: 100ms; }
+.ls-slide-up-delay-3 { animation-delay: 150ms; }
+.ls-slide-up-delay-4 { animation-delay: 200ms; }
+
+/* Button hover scale 1.03x */
+.ls-btn-scale:hover {
+  transform: scale(1.03);
+}
+
+.ls-btn-scale:active {
+  transform: scale(0.98);
+}
+
+/* Ripple (handled via JS; container ready) */
+.ls-ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sidebar expand/collapse */
+.ls-sidebar {
+  transition: width var(--duration-slow) var(--ease-out),
+    min-width var(--duration-slow) var(--ease-out);
+}
+
+/* Dashboard: card hover elevation */
+.ls-card-hover {
+  transition: transform var(--duration-normal) var(--ease-out),
+    box-shadow var(--duration-normal) var(--ease-out);
+}
+
+.ls-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Progress bar fill animation */
+@keyframes ls-progress-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.ls-progress-bar-fill {
+  transform-origin: left;
+  animation: ls-progress-fill var(--duration-slow) var(--ease-out) forwards;
+}
+
+/* Count-up is done via JS */
+
+/* Learning: accordion */
+@keyframes ls-accordion-open {
+  from { opacity: 0; max-height: 0; }
+  to { opacity: 1; max-height: 500px; }
+}
+
+.ls-accordion-content {
+  overflow: hidden;
+  transition: max-height var(--duration-slow) var(--ease-out),
+    opacity var(--duration-normal) var(--ease-out);
+}
+
+/* Quiz: question slide */
+@keyframes ls-slide-next {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes ls-slide-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.ls-quiz-slide-next {
+  animation: ls-slide-next var(--duration-normal) var(--ease-out) forwards;
+}
+
+.ls-quiz-slide-prev {
+  animation: ls-slide-prev var(--duration-normal) var(--ease-out) forwards;
+}
+
+/* Correct answer: green glow pulse */
+@keyframes ls-glow-correct {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+}
+
+.ls-answer-correct {
+  animation: ls-glow-correct 0.6s var(--ease-out);
+}
+
+/* Wrong answer: shake */
+@keyframes ls-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.ls-answer-wrong {
+  animation: ls-shake 0.4s var(--ease-out);
+}
+
+/* Bookmark pulse on click */
+@keyframes ls-bookmark-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+.ls-bookmark-pulse {
+  animation: ls-bookmark-pulse 0.3s var(--ease-out);
+}
+
+/* Analytics: graph reveal */
+@keyframes ls-graph-reveal {
+  from { opacity: 0; transform: scaleY(0); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+
+.ls-graph-reveal {
+  transform-origin: bottom;
+  animation: ls-graph-reveal var(--duration-slow) var(--ease-out) forwards;
+}
+
+/* Pull to refresh */
+@keyframes ls-ptr-spin {
+  to { transform: rotate(360deg); }
+}
+
+.ls-ptr-spinner {
+  animation: ls-ptr-spin 0.8s linear infinite;
+}
+
+/* Modal / overlay fade */
+@keyframes ls-modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ls-modal-content-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.ls-modal-overlay {
+  animation: ls-modal-in var(--duration-normal) var(--ease-out);
+}
+
+.ls-modal-content {
+  animation: ls-modal-content-in var(--duration-normal) var(--ease-out);
+}
+
+/* Toast slide-in */
+@keyframes ls-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.ls-toast {
+  animation: ls-toast-in var(--duration-normal) var(--ease-out);
+}
+
+/* Loader spinner */
+@keyframes ls-spinner {
+  to { transform: rotate(360deg); }
+}
+
+.ls-spinner {
+  animation: ls-spinner 0.7s linear infinite;
+}

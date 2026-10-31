@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lecturer Dashboard • LearnSphere AI</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <style>
+      .dash {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 240px 1fr;
+      }
+
+      .sidebar {
+        background: var(--color-primary);
+        color: #ffffff;
+        padding: 18px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .sidebar__brand {
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        font-size: 18px;
+        padding: 10px 10px 16px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      }
+
+      .nav {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-top: 8px;
+      }
+
+      .nav a {
+        color: #ffffff;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 10px;
+        border-radius: 10px;
+        opacity: 0.95;
+      }
+
+      .nav a:hover {
+        background: rgba(255, 255, 255, 0.14);
+        opacity: 1;
+      }
+
+      .nav a[aria-current="page"] {
+        background: rgba(255, 255, 255, 0.18);
+        opacity: 1;
+      }
+
+      .icon {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.16);
+        font-size: 14px;
+        font-weight: 700;
+        flex: 0 0 auto;
+      }
+
+      .content {
+        background: var(--color-bg);
+        padding: var(--section-gap);
+      }
+
+      .page-title {
+        margin: 0 0 12px;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .analytics-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .metric {
+        padding: 18px;
+      }
+
+      .metric__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .metric__icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #ffffff;
+      }
+
+      .metric__icon--primary {
+        background: var(--color-primary);
+      }
+
+      .metric__icon--secondary {
+        background: var(--color-secondary);
+      }
+
+      .metric__icon--success {
+        background: var(--color-success);
+      }
+
+      .metric__icon--neutral {
+        background: rgba(17, 24, 39, 0.72);
+      }
+
+      .metric__label {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color-text-muted);
+      }
+
+      .metric__value {
+        margin: 10px 0 0;
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--color-text);
+      }
+
+      @media (max-width: 1100px) {
+        .analytics-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+
+
+      @media (max-width: 640px) {
+        .analytics-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Header -->
+    <header class="mobile-header">
+      <div class="mobile-header__brand">LearnSphere AI</div>
+      <button class="hamburger" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </header>
+
+    <div class="dash">
+      <!-- Sidebar Overlay -->
+      <div class="sidebar-overlay" aria-hidden="true"></div>
+
+      <aside class="sidebar" aria-label="Lecturer navigation">
+        <div class="sidebar__brand">LearnSphere AI</div>
+
+        <nav class="nav">
+          <a href="#" aria-current="page">
+            <span class="icon">D</span>
+            <span>Dashboard</span>
+          </a>
+          <a href="#">
+            <span class="icon">C</span>
+            <span>Classes</span>
+          </a>
+          <a href="#">
+            <span class="icon">A</span>
+            <span>Assessments</span>
+          </a>
+          <a href="#">
+            <span class="icon">R</span>
+            <span>Reports</span>
+          </a>
+          <a href="#">
+            <span class="icon">S</span>
+            <span>Settings</span>
+          </a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <h1 class="page-title">Lecturer Dashboard</h1>
+
+        <section class="analytics-grid" aria-label="Analytics overview">
+          <article class="card metric">
+            <div class="metric__top">
+              <div>
+                <p class="metric__label">Total Students</p>
+                <p class="metric__value">248</p>
+              </div>
+              <div class="metric__icon metric__icon--primary" aria-hidden="true">
+                ST
+              </div>
+            </div>
+          </article>
+
+          <article class="card metric">
+            <div class="metric__top">
+              <div>
+                <p class="metric__label">Average Score</p>
+                <p class="metric__value">82%</p>
+              </div>
+              <div
+                class="metric__icon metric__icon--success"
+                aria-hidden="true"
+              >
+                AS
+              </div>
+            </div>
+          </article>
+
+          <article class="card metric">
+            <div class="metric__top">
+              <div>
+                <p class="metric__label">Weak Topics</p>
+                <p class="metric__value">6</p>
+              </div>
+              <div
+                class="metric__icon metric__icon--secondary"
+                aria-hidden="true"
+              >
+                WT
+              </div>
+            </div>
+          </article>
+
+          <article class="card metric">
+            <div class="metric__top">
+              <div>
+                <p class="metric__label">Active Classes</p>
+                <p class="metric__value">12</p>
+              </div>
+              <div class="metric__icon metric__icon--neutral" aria-hidden="true">
+                AC
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script src="./app/mobile-nav.js"></script>
+  </body>
+</html>
+

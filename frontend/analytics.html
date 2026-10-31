@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics • LearnSphere AI</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <style>
+      .page {
+        min-height: 100vh;
+        background: var(--color-bg);
+      }
+
+      .header {
+        padding-block: var(--section-gap);
+      }
+
+      .title {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      .subtitle {
+        margin: 6px 0 0;
+        color: var(--color-text-muted);
+      }
+
+      .chart-card {
+        padding: 20px;
+      }
+
+      .chart-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      .chart-title {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .legend {
+        display: inline-flex;
+        gap: 12px;
+        align-items: center;
+        color: var(--color-text-muted);
+        font-size: 13px;
+      }
+
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 999px;
+        display: inline-block;
+      }
+
+      .dot--primary {
+        background: var(--color-primary);
+      }
+
+      .chart-wrap {
+        width: 100%;
+        border-radius: 12px;
+        background: linear-gradient(
+          180deg,
+          rgba(37, 99, 235, 0.06),
+          rgba(37, 99, 235, 0)
+        );
+        border: 1px solid rgba(148, 163, 184, 0.25);
+        padding: 14px;
+      }
+
+      .chart-meta {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+        color: var(--color-text-muted);
+        font-size: 12px;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: var(--section-gap);
+        padding-bottom: var(--section-gap);
+      }
+
+      @media (max-width: 900px) {
+        .grid-2 {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .card-pad {
+        padding: 20px;
+      }
+
+      .card-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .kicker {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+      }
+
+      .hint {
+        margin: 0;
+        font-size: 13px;
+        color: var(--color-text-muted);
+      }
+
+      .list {
+        margin: 10px 0 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .topic {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        background: rgba(255, 255, 255, 0.75);
+      }
+
+      .topic strong {
+        font-size: 14px;
+      }
+
+      .topic small {
+        color: var(--color-text-muted);
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 4px 10px;
+        font-size: 12px;
+        font-weight: 700;
+        border: 1px solid rgba(124, 58, 237, 0.25);
+        color: var(--color-secondary);
+        background: rgba(124, 58, 237, 0.1);
+        white-space: nowrap;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .stat {
+        padding: 12px;
+        border-radius: 12px;
+        border: 1px solid rgba(15, 23, 42, 0.1);
+        background: rgba(255, 255, 255, 0.75);
+      }
+
+      .stat .label {
+        margin: 0;
+        font-size: 12px;
+        color: var(--color-text-muted);
+        font-weight: 600;
+      }
+
+      .stat .value {
+        margin: 6px 0 0;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      @media (max-width: 520px) {
+        .stats {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .header {
+          padding-block: 20px;
+        }
+        
+        .chart-card, .card-pad {
+          padding: 16px;
+        }
+
+        .chart-top {
+          flex-direction: column;
+        }
+
+        .topic {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="container header">
+        <h1 class="title">Analytics</h1>
+        <p class="subtitle">Academic performance insights across classes.</p>
+      </header>
+
+      <main class="container">
+        <section class="card chart-card" aria-label="Average score chart">
+          <div class="chart-top">
+            <div>
+              <h2 class="chart-title">Average score (last 6 quizzes)</h2>
+              <p class="hint" style="margin-top: 6px">
+                Trendline is a sample placeholder until real data is connected.
+              </p>
+            </div>
+            <div class="legend" aria-label="Chart legend">
+              <span class="legend-item">
+                <span class="dot dot--primary" aria-hidden="true"></span>
+                Average score
+              </span>
+            </div>
+          </div>
+
+          <div class="chart-wrap" role="img" aria-label="Line chart placeholder">
+            <svg
+              viewBox="0 0 640 220"
+              width="100%"
+              height="220"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="fillBlue" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#2563EB" stop-opacity="0.25" />
+                  <stop offset="100%" stop-color="#2563EB" stop-opacity="0.02" />
+                </linearGradient>
+              </defs>
+
+              <!-- grid -->
+              <g stroke="rgba(148,163,184,0.25)" stroke-width="1">
+                <line x1="40" y1="40" x2="620" y2="40" />
+                <line x1="40" y1="90" x2="620" y2="90" />
+                <line x1="40" y1="140" x2="620" y2="140" />
+                <line x1="40" y1="190" x2="620" y2="190" />
+              </g>
+
+              <!-- axes -->
+              <g stroke="rgba(15,23,42,0.22)" stroke-width="1.2">
+                <line x1="40" y1="20" x2="40" y2="200" />
+                <line x1="40" y1="200" x2="620" y2="200" />
+              </g>
+
+              <!-- area fill -->
+              <path
+                d="M40,200 L40,140 L156,120 L272,135 L388,100 L504,110 L620,80 L620,200 Z"
+                fill="url(#fillBlue)"
+              />
+
+              <!-- line -->
+              <path
+                d="M40,140 L156,120 L272,135 L388,100 L504,110 L620,80"
+                fill="none"
+                stroke="#2563EB"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+
+              <!-- points -->
+              <g fill="#2563EB">
+                <circle cx="40" cy="140" r="4" />
+                <circle cx="156" cy="120" r="4" />
+                <circle cx="272" cy="135" r="4" />
+                <circle cx="388" cy="100" r="4" />
+                <circle cx="504" cy="110" r="4" />
+                <circle cx="620" cy="80" r="4" />
+              </g>
+
+              <!-- y labels -->
+              <g fill="rgba(17,24,39,0.65)" font-size="11">
+                <text x="6" y="44">90%</text>
+                <text x="6" y="94">80%</text>
+                <text x="6" y="144">70%</text>
+                <text x="6" y="194">60%</text>
+              </g>
+            </svg>
+
+            <div class="chart-meta" aria-hidden="true">
+              <span>Quiz 1</span>
+              <span>Quiz 2</span>
+              <span>Quiz 3</span>
+              <span>Quiz 4</span>
+              <span>Quiz 5</span>
+              <span>Quiz 6</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="grid-2" aria-label="Analytics breakdown">
+          <article class="card card-pad" aria-label="Weak topics list">
+            <div class="card-head">
+              <div>
+                <h3 class="kicker">Weak Topics</h3>
+                <p class="hint">Areas where students commonly need support.</p>
+              </div>
+              <span class="pill">Needs focus</span>
+            </div>
+
+            <ul class="list">
+              <li class="topic">
+                <div>
+                  <strong>Evaluation metrics</strong><br />
+                  <small>Accuracy vs. precision/recall</small>
+                </div>
+                <span class="pill">High</span>
+              </li>
+              <li class="topic">
+                <div>
+                  <strong>Overfitting</strong><br />
+                  <small>Bias-variance tradeoff</small>
+                </div>
+                <span class="pill">Medium</span>
+              </li>
+              <li class="topic">
+                <div>
+                  <strong>Feature scaling</strong><br />
+                  <small>Normalization vs. standardization</small>
+                </div>
+                <span class="pill">Medium</span>
+              </li>
+            </ul>
+          </article>
+
+          <article class="card card-pad" aria-label="Student activity summary">
+            <div class="card-head">
+              <div>
+                <h3 class="kicker">Student Activity</h3>
+                <p class="hint">Engagement summary for the current week.</p>
+              </div>
+              <span class="badge badge-success">Active</span>
+            </div>
+
+            <div class="stats">
+              <div class="stat">
+                <p class="label">Weekly active students</p>
+                <p class="value">184</p>
+              </div>
+              <div class="stat">
+                <p class="label">Avg. time per module</p>
+                <p class="value">34m</p>
+              </div>
+              <div class="stat">
+                <p class="label">Quizzes attempted</p>
+                <p class="value">612</p>
+              </div>
+              <div class="stat">
+                <p class="label">Completion rate</p>
+                <p class="value">78%</p>
+              </div>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
+
