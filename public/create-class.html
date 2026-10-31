@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Class • LearnSphere AI</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <style>
+      .page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--section-gap);
+      }
+
+      .form-card {
+        width: 100%;
+        max-width: 500px;
+        padding: 32px;
+      }
+
+      .title {
+        margin: 0 0 16px;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      .field label {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--color-text);
+      }
+
+      .field input[type="text"] {
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid rgba(15, 23, 42, 0.16);
+        font: inherit;
+        background: #ffffff;
+      }
+
+      .field input:focus-visible {
+        outline: none;
+        box-shadow: var(--focus-ring);
+        border-color: transparent;
+      }
+
+      .create-btn {
+        width: 100%;
+        height: 45px;
+        margin-top: 4px;
+      }
+
+      .code-box {
+        display: none;
+        margin-top: 18px;
+        padding: 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(124, 58, 237, 0.25);
+        background: rgba(124, 58, 237, 0.08);
+      }
+
+      .code-box--visible {
+        display: block;
+      }
+
+      .code-box__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .code-label {
+        margin: 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: rgba(17, 24, 39, 0.8);
+      }
+
+      .code-value {
+        margin: 6px 0 0;
+        font-size: 22px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        color: var(--color-secondary);
+      }
+
+      @media (max-width: 767px) {
+        .page {
+          padding: 16px;
+        }
+        
+        .form-card {
+          padding: 20px;
+        }
+        
+        .code-box__row {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 12px;
+        }
+        
+        .code-box__row .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="card form-card" aria-labelledby="create-class-title">
+        <h1 id="create-class-title" class="title">Create Class</h1>
+
+        <form id="createClassForm">
+          <div class="field">
+            <label for="className">Class Name</label>
+            <input
+              id="className"
+              name="className"
+              type="text"
+              placeholder="e.g., Intro to AI"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="subject">Subject</label>
+            <input
+              id="subject"
+              name="subject"
+              type="text"
+              placeholder="e.g., Computer Science"
+              required
+            />
+          </div>
+
+          <button class="btn btn-primary create-btn" type="submit">
+            Create Class
+          </button>
+        </form>
+
+        <div id="codeBox" class="code-box" aria-live="polite">
+          <div class="code-box__row">
+            <div>
+              <p class="code-label">Generated class code</p>
+              <div id="classCode" class="code-value">------</div>
+            </div>
+            <button id="copyBtn" class="btn btn-outline" type="button">
+              Copy
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const form = document.getElementById("createClassForm");
+      const codeBox = document.getElementById("codeBox");
+      const classCodeEl = document.getElementById("classCode");
+      const copyBtn = document.getElementById("copyBtn");
+
+      function generateCode(len = 6) {
+        const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+        let out = "";
+        for (let i = 0; i < len; i++) {
+          out += chars[Math.floor(Math.random() * chars.length)];
+        }
+        return out;
+      }
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const code = generateCode(6);
+        classCodeEl.textContent = code;
+        codeBox.classList.add("code-box--visible");
+      });
+
+      copyBtn.addEventListener("click", async () => {
+        const code = classCodeEl.textContent.trim();
+        try {
+          await navigator.clipboard.writeText(code);
+          copyBtn.textContent = "Copied";
+          setTimeout(() => (copyBtn.textContent = "Copy"), 1200);
+        } catch {
+          copyBtn.textContent = "Copy failed";
+          setTimeout(() => (copyBtn.textContent = "Copy"), 1200);
+        }
+      });
+    </script>
+  </body>
+</html>
+

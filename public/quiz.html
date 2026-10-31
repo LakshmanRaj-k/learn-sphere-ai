@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz • LearnSphere AI</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <style>
+      .page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: var(--section-gap);
+      }
+
+      .question-card {
+        width: 100%;
+        max-width: 700px;
+        padding: 28px;
+      }
+
+      .question {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+
+      .options {
+        margin-top: 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .option {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 12px 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(15, 23, 42, 0.12);
+        background: rgba(255, 255, 255, 0.85);
+        cursor: pointer;
+      }
+
+      .option:hover {
+        border-color: rgba(37, 99, 235, 0.35);
+      }
+
+      .option input {
+        margin-top: 3px;
+      }
+
+      .option span {
+        color: var(--color-text);
+      }
+
+      .actions {
+        margin-top: 18px;
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      @media (max-width: 767px) {
+        .page {
+          align-items: flex-start;
+          padding: 16px;
+        }
+        
+        .question-card {
+          padding: 20px;
+        }
+        
+        .option {
+          padding: 16px 12px;
+        }
+        
+        .actions {
+          flex-direction: column;
+        }
+        
+        .actions .btn {
+          width: 100%;
+          padding: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="card question-card" aria-labelledby="q1">
+        <h1 id="q1" class="question">
+          Which statement best describes supervised learning?
+        </h1>
+
+        <form>
+          <div class="options" role="radiogroup" aria-label="Answer options">
+            <label class="option">
+              <input type="radio" name="answer" value="a" />
+              <span>Learning patterns from unlabeled data without a target.</span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="b" />
+              <span>
+                Learning from labeled examples to predict outputs for new inputs.
+              </span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="c" />
+              <span>Learning solely through trial-and-error rewards.</span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="d" />
+              <span>Hard-coding rules instead of learning from data.</span>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button class="btn btn-primary" type="button">Next</button>
+            <button class="btn btn-success" type="submit">Submit</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
+

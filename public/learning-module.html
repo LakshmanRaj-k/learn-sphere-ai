@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning Module • LearnSphere AI</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <style>
+      .layout {
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: 0.3fr 0.7fr;
+      }
+
+      .panel-left {
+        border-right: 1px solid rgba(148, 163, 184, 0.25);
+        background: #f1f5f9;
+        padding: var(--section-gap);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .panel-right {
+        background: var(--color-bg);
+        padding: var(--section-gap);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .topic-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+
+      .topic-list {
+        margin-top: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .topic-btn {
+        width: 100%;
+        text-align: left;
+        padding: 8px 10px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        background: #ffffff;
+        font: inherit;
+        cursor: pointer;
+        color: var(--color-text);
+      }
+
+      .topic-btn--active {
+        background: var(--color-primary);
+        color: #ffffff;
+      }
+
+      .topic-btn:not(.topic-btn--active):hover {
+        border-color: rgba(148, 163, 184, 0.7);
+      }
+
+      .explain-card {
+        padding: 20px;
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .explain-body {
+        font-size: 15px;
+        color: var(--color-text-muted);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 8px;
+      }
+
+      @media (max-width: 900px) {
+        .layout {
+          grid-template-columns: 1fr;
+        }
+
+        .panel-left {
+          border-right: none;
+          border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 10px;
+        }
+
+        .topic-list {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .topic-btn {
+          width: auto;
+        }
+      }
+
+      @media (max-width: 767px) {
+        .layout {
+          display: block;
+        }
+        
+        .panel-left {
+          padding: 16px;
+        }
+        
+        .topic-list {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 8px;
+        }
+        
+        .topic-btn {
+          white-space: nowrap;
+          flex-shrink: 0;
+        }
+        
+        .panel-right {
+          padding: 16px;
+        }
+        
+        .actions {
+          flex-direction: column;
+        }
+        
+        .actions .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="panel-left" aria-label="Topics">
+        <div>
+          <div class="topic-title">Topics</div>
+          <p class="muted" style="margin: 0; font-size: 13px">
+            Choose a concept to explore with AI.
+          </p>
+        </div>
+        <div class="topic-list">
+          <button class="topic-btn topic-btn--active" type="button">
+            Introduction to Machine Learning
+          </button>
+          <button class="topic-btn" type="button">Linear Regression</button>
+          <button class="topic-btn" type="button">Classification Basics</button>
+          <button class="topic-btn" type="button">Evaluation Metrics</button>
+        </div>
+      </aside>
+
+      <main class="panel-right">
+        <section class="card explain-card" aria-label="AI explanation">
+          <h1 class="card__title">Introduction to Machine Learning</h1>
+          <p class="explain-body">
+            Machine learning focuses on building models that can learn patterns
+            from data and make predictions or decisions without being explicitly
+            programmed for each rule. In this module, you will connect concepts
+            to real datasets and reflect on how models generalize.
+          </p>
+        </section>
+
+        <div class="actions" aria-label="Learning actions">
+          <button class="btn btn-secondary" type="button">Ask AI</button>
+          <button class="btn btn-primary" type="button">Next Topic</button>
+          <button class="btn btn-success" type="button">
+            Mark as Understood
+          </button>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
+
